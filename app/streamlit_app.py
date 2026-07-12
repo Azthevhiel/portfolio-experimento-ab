@@ -21,12 +21,24 @@ from statsmodels.stats.power import TTestIndPower
 
 st.set_page_config(page_title="Experimento A/B — cartel de promoción", layout="wide")
 
-METRICAS_PATH = "data/processed/metricas_diarias.csv"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+METRICAS_PATH = BASE_DIR / "data" / "processed" / "metricas_diarias.csv"
 
 
 @st.cache_data
 def cargar_metricas():
     return pd.read_csv(METRICAS_PATH, parse_dates=["fecha"])
+
+
+if not METRICAS_PATH.exists():
+    st.error(
+        "No se encontró data/processed/metricas_diarias.csv. "
+        "Corré antes el notebook 01_eda.ipynb "
+        "(o `python src/generate_data.py` y luego ese notebook)."
+    )
+    st.stop()
 
 
 st.title("Experimento A/B — cartel de promoción en góndola")

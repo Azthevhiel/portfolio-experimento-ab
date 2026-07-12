@@ -4,6 +4,6 @@ __pycache__/
 .venv/
 venv/
 .env
-data/processed/*.csv
-!data/processed/.gitkeep
+# data/processed/ SÍ se versiona: las demos de Streamlit leen de acá,
+# así funcionan apenas se clona el repo o se deploya en Streamlit Cloud.
 .DS_Store
